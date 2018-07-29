@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Alarm Clock</title>
+		<link id="favicon" rel="icon" href="https://gomix.com/favicon-app.ico" type="image/x-icon">
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.6/semantic.min.css">
+		<style>
+			/* styles */
+			/* called by your view template */
+
+			/* You might want to try something fancier: */
+			/* less: http://lesscss.org/ */
+
+			* {
+			  box-sizing: border-box;
+			}
+
+			body {
+			  font-family: helvetica, arial, sans-serif;
+			  margin: 25px;
+			}
+
+
+			.ui.list{
+			  border:none
+			}
+			.bold {
+			  font-weight: bold;
+			}
+
+			p {
+			  max-width: 600px;
+			}
+
+			form {
+			  margin-bottom: 25px;
+			  padding: 15px;
+			  background-color: cyan;
+			  display: inline-block;
+			  width: 100%;
+			  max-width: 340px;
+			  border-radius: 3px;
+			}
+
+			input[type="input"] {
+			  display: block;
+			  margin-bottom: 10px;
+			  padding: 5px;
+			  width: 100%;
+			  border: 1px solid lightgrey;
+			  border-radius: 3px;
+			  font-size: 16px;
+			}
+
+			button {
+			  font-size: 16px;
+			  border-radius: 3px;
+			  background-color: lightgrey;
+			  border: 1px solid grey;
+			  box-shadow: 2px 2px teal;
+			  cursor: pointer;
+			}
+
+			button:hover {
+			  background-color: yellow;
+			}
+
+			button:active {
+			  box-shadow: none;
+			}
+
+			li {
+			  margin-bottom: 5px;
+			}
+
+			footer {
+			  margin-top: 50px;
+			  padding-top: 25px;
+			  border-top: 1px solid lightgrey;
+			}
+
+			footer > a {
+			  color: #BBBBBB;
+			}
+
+			.nicejob {
+			  text-decoration: line-through;
+			}
+			body{
+			  font-family: -apple-system,SF UI Text,Helvetica Neue,Helvetica,Arial,sans-serif;
+				margin: 0;
+				padding: 0;
+				color: #000;
+				font-size: 14px;
+				line-height: 1.4;
+				width: 100%;
+				-webkit-text-size-adjust: 100%;
+				background: #fff;
+				
+			}
+			a{
+			  color:#007aff;
+			}
+			.wrap{
+			  width:320px;
+			  margin:auto;
+			  
+				background: #efeff4;
+
+
+			}
+			.navbar, .subnavbar, .toolbar {
+				background: #f7f7f8;
+			}
+			.page>.navbar, .page>.toolbar, .view>.navbar, .view>.toolbar, .views>.navbar, .views>.toolbar {
+				position: absolute;
+			}
+			.toolbar {
+				left: 0;
+				bottom: 0;
+			}
+			.toolbar-inner {
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				padding: 0 8px;
+				box-sizing: border-box;
+				display: -webkit-box;
+				display: -ms-flexbox;
+				display: -webkit-flex;
+				display: flex;
+				-webkit-box-pack: justify;
+				-ms-flex-pack: justify;
+				-webkit-justify-content: space-between;
+				justify-content: space-between;
+				-webkit-box-align: center;
+				-ms-flex-align: center;
+				-webkit-align-items: center;
+				align-items: center;
+			}
+			.navbar, .toolbar {
+				height: 44px;
+				width: 100%;
+				box-sizing: border-box;
+				font-size: 17px;
+			  position:relative;
+			  padding-right:44px;
+			  padding-left:44px;
+			  border-bottom:1px solid #c8c7cc;
+			}
+			.navbar .pills{
+			  position:absolute;
+			  top:0;
+			  display:block;
+			  text-align:center;
+			  height:44px;
+			  width:44px;
+			  line-height:44px;
+			  font-size:15px;
+			}
+			.pills.left{
+			  left:0;
+			}
+			.pills.right{
+			  right:0;
+			}
+
+			.navbar h1 {
+				font-size: 17px;
+				font-weight: 500;
+				text-align: center;
+				margin: 0;
+				position: relative;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				line-height: 44px;
+			  
+				
+			}
+			.content-block-title {
+				position: relative;
+				overflow: hidden;
+				margin: 0;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				font-size: 14px;
+				text-transform: uppercase;
+				line-height: 1;
+				color: #6d6d72;
+				margin: 35px 15px 10px;
+			}
+			.content-block-inner {
+				background: #fff;
+				padding: 10px 15px;
+				
+				width: 100%;
+				position: relative;
+				color: #000;
+			  border-top:1px solid #c8c7cc;
+			  border-bottom:1px solid #c8c7cc;
+			}
+
+			.content-block-inner .item{
+			  border:none;
+			}
+			.content-block-inner .item label{
+			  padding:10px 0;
+			}
+			.content-block-inner .item.select input[type="text"]{
+			  width: 200px;
+				font-size: 15px;
+				padding: 10px;
+			}
+			.content-block-inner select{
+			  width:30%;
+			  height:30px;
+			  font-size:15px;
+			}
+			.page{
+			  height:100%;
+			  overflow:auto;
+			}
+			.clock{
+			  background: #fff;
+				padding: 50px 10px;
+				
+				width: 100%;
+				position: relative;
+				color: #000;
+			  text-align:center;
+			  font-size:44px;
+			  line-height:44px;
+			  border-top:1px solid #c8c7cc;
+			  border-bottom:1px solid #c8c7cc;
+			  }
+			.clock small{
+			  font-size: 22px;
+				color: #999;
+				display: block;
+			}
+
+			.action{
+			  padding:10px 20px;
+			  border-top:1px solid #c8c7cc;
+			}
+			.button{
+			  border: 1px solid #007aff;
+				color: #007aff;
+				text-decoration: none;
+				text-align: center;
+				display: block;
+				border-radius: 5px;
+				line-height: 27px;
+				box-sizing: border-box;
+				-webkit-appearance: none;
+				-moz-appearance: none;
+				-ms-appearance: none;
+				appearance: none;
+				background: 0 0;
+				padding: 8px 10px;
+				margin: 0;
+				
+				white-space: nowrap;
+				position: relative;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				font-size: 14px;
+				font-family: inherit;
+				cursor: pointer;
+				outline: 0;
+			  background:#fff;
+			}
+			.button.danger{
+			  color:#d00;
+			  border-color:#d00
+			}
+			.button.small{
+			  border: none;
+				color: #007aff;
+				text-decoration: none;
+				text-align: center;
+				display: block;
+				
+				line-height: 27px;
+				box-sizing: border-box;
+				-webkit-appearance: none;
+				-moz-appearance: none;
+				-ms-appearance: none;
+				appearance: none;
+				background: 0 0;
+				padding: 8px 10px;
+				margin: 0;
+				
+				white-space: nowrap;
+				position: relative;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				font-size: 15px;
+				font-family: inherit;
+				cursor: pointer;
+				outline: 0;
+			  background:transparent;
+			}
+			.list{
+			  list-style:none;
+			  border-top:1px solid #c8c7cc;
+			  margin:0;
+			  padding:0;
+			}
+			.item{
+			  background:#fff;
+			  border-bottom:1px solid #c8c7cc;
+			  margin:0;
+			  position:relative;
+			}
+			.item label{
+			  
+			  display:block;
+			  padding:10px 20px;
+			  color:#000;
+			  text-decoration:none;
+			  
+			  }
+
+			.item strong{
+			  font-size:32px;
+			  font-weight:normal;
+			}
+			.item sub{
+			  font-size:20px;
+			  vertical-align:baseline;
+			}
+			.item small{
+			  display:block;
+			  color:#999;
+			  font-size:13px;
+			}
+			.item input{
+			  float:right;
+			  height: 20px;
+				width: 20px;
+				margin: 10px 0 0 0;
+			}
+			.item.select input{
+			  float:right;
+			  
+			  position:relative;
+			  margin:0;
+			}
+
+
+			.item .remove{
+			  position:absolute;
+				left:10px;
+			  top:20px;
+			  display:none;
+			  height:16px;
+			  width:16px;
+			  background:#d00;
+			  text-align:center;
+			  font-size:11px;
+			  color:#fff;
+			  border-radius:8px;
+			  line-height:16px;
+			  text-decoration:none
+			  
+			}
+			.item.off{ 
+			  background:#f9f9f9;
+			}
+			.item.off label,
+			.item.off sub,
+			.item.off small{ 
+			  
+			  color:#ddd;
+			}
+			.item.edit label{
+			  margin-left:40px;
+			  
+			}
+			.item.edit label:after{
+			  content:"\276F";
+			  position:absolute;
+			  top: 15px;
+				right: 10px;
+				color: #999;
+				font-size: 15px;
+			}
+			.item.edit .remove{
+			  display:block;
+			}
+			.item.edit input{
+			  display:none;
+			}
+
+			.alarm{
+			  background:#000;
+			}
+			.alarm .clock{
+			  background:#000;
+			  color:#fff;
+
+			}
+			.alarm .action,
+			.alarm .clock{
+			  border:none
+			}
+			.alarm .button + .button{
+			  margin-top:10px;
+			}
+			.input {
+				margin: 10px;
+				padding: 10px;
+			}
+		</style>
+	</head>
+	<body onload="currentTime()">
+
+		<div>
+		
+			<section class="wrap" id="clockBlock">
+			  <div class="navbar">
+				<h1>Clock</h1>
+			  </div>
+			  <div class="page">
+				<div class="clock">
+				  <div id="time"></div>
+				  <small id="today"></small>
+				</div>
+			  </div>
+			  
+			  <div class="toolbar">
+				  <div class="toolbar-inner">
+					<a href="#" class="link" onclick="gotoAlarm()">Alarm</a>
+				  </div>
+				</div>
+			</section>
+			
+			<section class="wrap" id="alarmBlock" style="display: none;">
+			  <div class="navbar">
+				<!-- <a class="pills left editAlarms">Edit</a> -->
+				<h1>Alarm</h1>
+				<a class="pills right addAlarm" onclick="addAlarm()">Add</a>
+			  </div>
+			  <div class="page">
+				<!-- show this when no alarms are set -->
+				<div class="clock" id="noalarm">
+				  <p>No Alarm set</p>
+				</div>
+				<div id="setAlarm" style="display:none; text-align: center;">
+					<div style="margin: 10px; padding:10px;">
+						<input class="input" type="text" maxlength="2" size="2" id="alarmhour">
+						<span>:</span>
+						<input class="input" type="text" maxlength="2" size="2" id="alarmminutes"><br><br>
+						<input class="input" type="text" placeholder="Label" id="alarmlabel"><br>
+					</div>
+					<button class="input" onclick="setAlarm()">Set</button>
+					<button class="input" onclick="cancelAlarm()">Cancel</button>
+				</div>
+				<div id="alarms">
+					
+				</div>
+			  </div>
+			  
+			  <div class="toolbar">
+				  <div class="toolbar-inner">
+					<a href="#" class="link" onclick="gotoClock()">Clock</a>
+				  </div>
+				</div>
+			</section>
+			
+			<section class="wrap" id="alarmTime" style="display: none;">
+			  <div class="page alarm">
+				  <div class="clock">
+					<div id="alarm"></div>
+					<p class="" id="alarmtitle"></p>
+				  </div>
+				  
+				  <div class="action">
+					<a href="#" data-panel="left" onclick="gotoClock()" class="button open-panel">Stop</a>
+					
+				  </div>
+				  
+			  
+			  </div>
+			</section>
+			
+		</div>
+		
+		
+		<script>
+		
+			//Vairables Decleration
+			var today, hrs, mins, secs, date, days, months, day, month, year;
+			//AH = Alarm Hours
+			//AM = Alarm Minutes
+			//AL = Alarm Label
+			var AH, AM, AL;
+			var alarmDate = new Date();
+			var alarms = [];
+			var hours;
+			var id = 0;
+			var currentID = 0;
+			today = new Date();
+			days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+			months = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
+			
+			// Function to execute on load
+			function currentTime() {
+			
+				//Assigning values to variables
+				today = new Date();
+				hrs = today.getHours();
+				mins = today.getMinutes();
+				secs = today.getSeconds();
+				
+				day = days[today.getDay()];
+				date = today.getDate();
+				month = months[today.getMonth()];
+				year = today.getFullYear();
+			
+				//prepend 0 if value is less than 10
+				hrs = checkTime(hrs);
+				mins = checkTime(mins);
+				secs = checkTime(secs);
+				
+				//Display details on the page
+				document.getElementById('time').innerHTML = hrs + ":" + mins + ":" + secs;
+				document.getElementById('alarm').innerHTML = hrs + ":" + mins + ":" + secs;
+				document.getElementById('today').innerHTML = day + " " + date + " " + month + ", " + year;
+				
+				// Block to execute every minute to check if the alarm is needed to be trigger
+				if(secs < 1){
+					for(let i=0; i<alarms.length; i++) {
+						if(alarms[i].active && alarms[i].hour == hrs && alarms[i].minute == mins) {
+							currentID = alarms[i].id;
+							document.getElementById('clockBlock').style.display = "none";
+							document.getElementById('alarmBlock').style.display = "none";
+							document.getElementById('alarmTime').style.display = "block";
+							document.getElementById('alarm').innerHTML = hrs + ":" + mins + ":" + secs;
+							document.getElementById('alarmtitle').innerHTML = alarms[i].label;
+						}
+					}
+				}
+				//execute the function every second
+				setTimeout(currentTime, 1000);
+			}
+			
+			//Function to prepend 0 if value is less than 10
+			function checkTime(i) {
+				if (i < 10) {
+					i = "0" + i;
+				}
+				return i;
+			}
+			
+			//Function to go to Alarm Screen and display all the alarms if set
+			function gotoAlarm() {
+				alarmSort();
+				document.getElementById('clockBlock').style.display = "none";
+				document.getElementById('alarmBlock').style.display = "block";
+				var allAlarms = "";
+				var active = "";
+				if(alarms.length < 1) {
+					document.getElementById('noalarm').style.display = "block";
+				} else {
+					document.getElementById('noalarm').style.display = "none";
+					allAlarms += "<ul class='list'>";
+					for(let i=0; i<alarms.length; i++) {
+						allAlarms += "<li class='item' id='alarmlist"+alarms[i].alarmid+"'>";
+						allAlarms += "<label href='#' data-template='about' data-context-name='about' class='item-link item-content'>";
+						active = (alarms[i].active) ? "checked":" ";
+						allAlarms += "<a href='' class='remove'>X</a><input type='checkbox' onchange='editalarm("+alarms[i].alarmid+")' id='alarm"+alarms[i].alarmid+"' "+active+" />";
+						allAlarms += "<strong>" + alarms[i].hour + ":" + alarms[i].minute + "</strong>";
+						allAlarms += "<small>" + alarms[i].label + "</small>";
+						allAlarms += "</label>";
+						allAlarms += "</li>";
+					}
+					allAlarms += "</ul>";
+					document.getElementById('alarms').innerHTML = allAlarms;
+				}
+			}
+			
+			//JSON sort WRT time
+			function alarmSort() {
+				//Sort an array for upcoming alarm
+				for(let i=0; i<alarms.length; i++) {
+					alarms[i].currentTimestamp = alarmDate.getTime();
+					if(alarms[i].active) {
+						
+					}
+				}
+				
+				alarms.sort(function(a, b) {
+					if(a.timeStamp < b.timeStamp) {
+						return -1;
+					} else if(a.timeStamp > b.timeStamp){
+						return 1;
+					}
+					return 0;
+				})
+				
+				//To move element to last if its past the current time
+				for(let i=0; i<alarms.length; i++) {
+					if((alarms[i].currentTimestamp - alarms[i].timeStamp) < 1) {
+						alarms.push(alarms.shift());
+					}
+				}
+				
+				//To move element to last if its inactive
+				for(let i=0; i<alarms.length; i++) {
+					if(!alarms[i].active) {
+						alarms.push(alarms.shift());
+					}
+				}
+			}
+			
+			//Function to go Back to Clock Screen
+			function gotoClock() {
+				document.getElementById('clockBlock').style.display = "block";
+				document.getElementById('alarmBlock').style.display = "none";
+				document.getElementById('alarmTime').style.display = "none";
+			}
+			
+			//Function to Edit Alarm, set it enable or disable
+			function editalarm(id) {
+				for(let i=0; i<alarms.length; i++) {
+					if(id == alarms[i].alarmid) {
+						alarms[i].active = document.getElementById("alarm"+id).checked;
+						if(document.getElementById("alarm"+id).checked == true) {
+							document.getElementById("alarmlist"+id).classList.remove("off");
+						} else {
+							document.getElementById("alarmlist"+id).classList.add("off");
+						}
+					}
+				}
+			}
+			
+			//Function to show add Alarm block
+			function addAlarm() {
+				document.getElementById('setAlarm').style.display = "block";
+				document.getElementById('alarmhour').value = hrs;
+				document.getElementById('alarmminutes').value = mins;
+			}
+			
+			//Function to set Alarm and also validate the inputs given by the user
+			function setAlarm() {
+				AH = document.getElementById('alarmhour').value;
+				AM = document.getElementById('alarmminutes').value;
+				AL = document.getElementById('alarmlabel').value;
+				
+				if (isNaN(AH) || AH < 0 || AH > 24) {
+					alert("Invalid");
+				} else if (isNaN(AM) || AM < 0 || AM > 59) {
+					alert("Invalid");
+				} else {
+					id++;
+					alarms.push({alarmid: id, hour: AH, minute: AM, label: AL, active: true, timeStamp: new Date().setHours(AH, AM), currentTimestamp: ''});
+					document.getElementById('setAlarm').style.display = "none";
+					document.getElementById('clockBlock').style.display = "block";
+					document.getElementById('alarmBlock').style.display = "none";
+					document.getElementById('alarmlabel').value = "";
+				}
+			}
+			
+			function cancelAlarm() {
+				document.getElementById('setAlarm').style.display = "none";
+			}
+			
+		</script>
+		
+	</body>
+</html>
